@@ -1,0 +1,68 @@
+{#
+Things list page
+Uses the thing component, setting data values based on
+the multi-table query, giving thing and owner info.
+If a user is logged in, also shows a form to add a thing
+#}
+
+{% extends 'pages/base.jinja' %}
+
+
+{% block title %}Things{% endblock %}
+
+
+{% block content %}
+
+    <article>
+
+        <header>
+            <h1>All the Things</h1>
+        </header>
+
+        {% if things %}
+
+            <ul id="thing-list">
+
+                {% for thing in things %}
+
+                    {% with
+                        id=thing['t_id'],
+                        name=thing['t_name'],
+                        image=thing['t_image'],
+                        owner=thing['u_id'],
+                        owner_name=thing['u_name']
+                    %}
+
+                        {% include 'components/thing.jinja' %}
+
+                    {% endwith %}
+
+                {% endfor %}
+
+            </ul>
+
+        {% else %}
+
+            <p>No things, yet!</p>
+
+        {% endif %}
+
+    </article>
+
+    {% if session['username'] %}
+
+        <article>
+            <details>
+
+                <summary>Add a Thing</summary>
+
+                {% include 'components/thing-form.jinja' %}
+
+            </details>
+        </article>
+
+    {% endif %}
+
+
+{% endblock %}
+

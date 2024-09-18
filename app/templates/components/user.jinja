@@ -1,0 +1,46 @@
+{#
+Component to display a user's details
+including the things they own, using the
+thing component with appropriate data values
+#}
+
+<article id="user-details">
+
+    {% if user %}
+
+        <header>
+            <h1>{{ user['name'] }}'s Things</h1>
+        </header>
+
+        {% if things %}
+
+            <ul id="thing-list">
+
+                {% for thing in things %}
+
+                    {% with id=thing['id'],
+                            name=thing['name'],
+                            image=thing['image'],
+                            owner=thing['owner']
+                    %}
+                        {% include 'components/thing.jinja' %}
+                    {% endwith %}
+
+                {% endfor %}
+
+            </ul>
+
+        {% else %}
+
+            <h3>None!</h3>
+
+        {% endif %}
+
+    {% else %}
+
+        Select a user...
+
+    {% endif %}
+
+</article>
+

@@ -1,0 +1,91 @@
+{#
+Users page
+Shows a list of all users in first panel
+user names trigger HTMX requests for user info.
+Second panel will be populated with a user's info
+via the user component if an id is passed in, or
+a message otherwise
+#}
+
+{% extends 'pages/base.jinja' %}
+
+
+{% block title %}Users{% endblock %}
+
+
+{% block content %}
+
+    <section id="user">
+
+        <article>
+
+            <header>
+                <h1>All the Users</h1>
+            </header>
+
+            {% if users %}
+
+                <ul id="user-list">
+
+                    {% for user in users %}
+
+                        <li
+                            hx-get="/users/{{ user['id'] }}/details"
+                            hx-target="#user-details"
+                            hx-swap="outerHTML"
+                            hx-push-url="/users/{{ user['id'] }}"
+                            role="button"
+                        >
+                            {{ user['name'] }}
+
+                            {% if session['id'] and user['id'] == session['id'] %}
+
+                                <button
+                                    hx-delete="/users/{{ user['id'] }}"
+                                    class="delete"
+                                    data-tooltip="Delete this user account"
+                                    hx-confirm="Really delete this user account?"
+                                    hx-target="closest li"
+                                    hx-swap="outerHTML"
+                                >×</button>
+
+                            {% endif %}
+
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            {% else %}
+
+                <p>No users, yet!</p>
+
+            {% endif %}
+
+        </article>
+
+
+        {% if focus_user %}
+
+            <article
+                id="user-details"
+                hx-get="/users/{{ focus_user }}/details"
+                hx-swap="outerHTML"
+                hx-trigger="load"
+            >
+                Loading...
+            </article>
+
+        {% else %}
+
+            <article id="user-details">
+                Select a user...
+            </article>
+
+        {% endif %}
+
+    </section>
+
+{% endblock %}
+

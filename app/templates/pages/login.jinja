@@ -1,0 +1,40 @@
+{#
+Login form page
+#}
+
+{% extends 'pages/base.jinja' %}
+
+
+{% block title %}Login{% endblock %}
+
+
+{% block content %}
+
+    <article>
+        <header>
+            <h1>Login</h1>
+        </header>
+
+        <form action="/login" method="post">
+
+            <label>
+                Username
+                <input name="username" type="text" required>
+            </label>
+
+            <label>
+                Password
+                <input name="password" type="password" required>
+            </label>
+
+            <input type="submit" value="Login">
+
+        </form>
+
+        <footer>
+            Or, if you don't have an account, <a href="/signup">Sign Up</a>
+        </footer>
+    </article>
+
+{% endblock %}
+

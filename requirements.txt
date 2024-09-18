@@ -1,1 +1,10 @@
-Flask==2.3.2
+#----------------------------------------------------------------
+# Required packages to install via pip when deploying to Railway
+#----------------------------------------------------------------
+
+# Flask framework
+Flask
+# BCrypt for password hashing
+flask-bcrypt
+# Utility tools
+Werkzeug

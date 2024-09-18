@@ -1,0 +1,40 @@
+{#
+Base page
+Requires blocks for the page title and main content
+Loads HTMX and PicoCSS, along with app stylesheet
+#}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/flask.png') }}">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <script src="https://unpkg.com/htmx.org@2"></script>
+</head>
+
+<body hx-boost="true">
+
+    <header>
+        {% include 'components/nav.jinja' %}
+    </header>
+
+    <main>
+        {% include 'components/messages.jinja' %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+
+</html>
+

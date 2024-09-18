@@ -1,0 +1,117 @@
+:root {
+    --alert-text: #51af57;
+    --error-text: #bb5151;
+    --danger-back: #cd1c1c;
+    --danger-text: #fff;
+    --thing-back: #7771;
+}
+
+
+/**********************************************
+GENERAL LAYOUT
+*/
+
+details {
+    margin-top: 0.7rem;
+}
+
+article:has(form) {
+    max-width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/**********************************************
+USER PAGES
+*/
+
+#user {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media screen and (min-width: 50rem) {
+    #user {
+        grid-template-columns: 15rem 1fr;
+    }
+}
+
+#user-list {
+    padding: 0;
+}
+
+#user-list li {
+    list-style: none;
+    position: relative;
+}
+
+/**********************************************
+THINGS PAGES
+*/
+
+#thing-list {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+#thing-list .thing-details {
+    list-style: none;
+    width: 10rem;
+    text-align: center;
+    position: relative;
+    background-color: var(--thing-back);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#thing-list .thing-details img {
+    object-fit: contain;
+    aspect-ratio: 1 / 1;
+}
+
+button.delete {
+    padding: 0.1rem;
+    width: 1.2rem;
+    border-radius: 2rem;
+    line-height: 1;
+    background-color: var(--danger-back);
+    color: var(--danger-text);
+    border: none;
+    position: absolute;
+    right: -0.4rem;
+    top: -0.2rem;
+}
+
+
+/**********************************************
+FLASH MESSAGES
+*/
+
+#messages {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--pico-block-spacing-vertical);
+}
+
+#messages .message {
+    color: var(--alert-text);
+    list-style: none;
+    text-align: center;
+}
+
+#messages .message.error {
+    color: var(--error-text);
+}
